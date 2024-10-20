@@ -3,7 +3,7 @@ spring:
     name: polynomial-processing-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
     username: postgres
     password: ${DATABASE_PASSWORD:}
 
@@ -11,6 +11,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  cache:
+    type: redis
+
 
   data:
     redis:
