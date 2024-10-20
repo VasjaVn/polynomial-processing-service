@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: polynomial-processing-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: ${DATABASE_PASSWORD:}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+## Custom Application Properties
+app:
+  cache:
+    ttl: 30
+    # NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS
+    timeUnit: SECONDS
