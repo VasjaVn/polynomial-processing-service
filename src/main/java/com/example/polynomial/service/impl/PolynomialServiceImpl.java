@@ -36,7 +36,7 @@ public class PolynomialServiceImpl implements PolynomialService {
 
     private final PolynomialCalculateRepository polynomialCalculateRepository;
 
-    private final RedisTemplate<String, Double> redisTemplate;
+//    private final RedisTemplate<String, Double> redisTemplate;
 
     private final PolynomialProcessor polynomialProcessor;
 
@@ -93,15 +93,15 @@ public class PolynomialServiceImpl implements PolynomialService {
     private void doEvaluatePolynomial(Polynomial polynomial) {
         doSimplifyOrMultiplyPolynomial(polynomial);
 
-        String cacheKey = polynomial.getSimplifiedPolynomial() + "|" + polynomial.getCalculationResult().getValue();
-
-        if (TRUE.equals(redisTemplate.hasKey(cacheKey))) {
-            Double cacheResult = redisTemplate.opsForValue().get(cacheKey);
-
-            polynomial.getCalculationResult().setResult(cacheResult);
-            polynomial.getCalculationResult().setCalculationResultSource(CACHE);
-
-        } else {
+//        String cacheKey = polynomial.getSimplifiedPolynomial() + "|" + polynomial.getCalculationResult().getValue();
+//
+//        if (TRUE.equals(redisTemplate.hasKey(cacheKey))) {
+//            Double cacheResult = redisTemplate.opsForValue().get(cacheKey);
+//
+//            polynomial.getCalculationResult().setResult(cacheResult);
+//            polynomial.getCalculationResult().setCalculationResultSource(CACHE);
+//
+//        } else {
             PolynomialCalculateEntity polynomialCalculateEntity =
                     polynomialCalculateRepository.findOneByPolynomialIdAndValue(
                             polynomial.getSimplifiedPolynomialHash(),
@@ -119,8 +119,42 @@ public class PolynomialServiceImpl implements PolynomialService {
                         polynomialMapper.toEntity(polynomial));
             }
 
-            redisTemplate.opsForValue().set(cacheKey, polynomial.getCalculationResult().getResult(),
-                    cacheProperties.getTtl(), cacheProperties.getTimeUnit());
-        }
+//            redisTemplate.opsForValue().set(cacheKey, polynomial.getCalculationResult().getResult(),
+//                    cacheProperties.getTtl(), cacheProperties.getTimeUnit());
+//        }
     }
+
+//    private void doEvaluatePolynomial(Polynomial polynomial) {
+//        doSimplifyOrMultiplyPolynomial(polynomial);
+//
+//        String cacheKey = polynomial.getSimplifiedPolynomial() + "|" + polynomial.getCalculationResult().getValue();
+//
+//        if (TRUE.equals(redisTemplate.hasKey(cacheKey))) {
+//            Double cacheResult = redisTemplate.opsForValue().get(cacheKey);
+//
+//            polynomial.getCalculationResult().setResult(cacheResult);
+//            polynomial.getCalculationResult().setCalculationResultSource(CACHE);
+//
+//        } else {
+//            PolynomialCalculateEntity polynomialCalculateEntity =
+//                    polynomialCalculateRepository.findOneByPolynomialIdAndValue(
+//                            polynomial.getSimplifiedPolynomialHash(),
+//                            polynomial.getCalculationResult().getValue());
+//
+//            if (polynomialCalculateEntity != null) {
+//                polynomial.getCalculationResult().setResult(polynomialCalculateEntity.getResult());
+//                polynomial.getCalculationResult().setCalculationResultSource(DATABASE);
+//
+//            } else {
+//                polynomialProcessor.evaluatePolynomial(polynomial);
+//                polynomial.getCalculationResult().setCalculationResultSource(EVALUATION);
+//
+//                polynomialRepository.save(
+//                        polynomialMapper.toEntity(polynomial));
+//            }
+//
+//            redisTemplate.opsForValue().set(cacheKey, polynomial.getCalculationResult().getResult(),
+//                    cacheProperties.getTtl(), cacheProperties.getTimeUnit());
+//        }
+//    }
 }
