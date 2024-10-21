@@ -2,11 +2,13 @@ package com.example.polynomial.util.processor.helper;
 
 import com.example.polynomial.model.domain.Polynomial;
 import com.example.polynomial.util.processor.converter.PolynomialConverter;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.TreeMap;
 
+@Log4j2
 @Component
 public class PolynomialSimplifier extends AbstractPolynomialBase {
 
@@ -20,8 +22,12 @@ public class PolynomialSimplifier extends AbstractPolynomialBase {
     }
 
     public void simplify(Polynomial polynomial) {
-        evaluateAnatomyForPolynomial(polynomial);
+        log.info(">> SIMPLIFIER: Simplify polynomial - [ polynomial=\"{}\" ]", polynomial.getNormalized());
+
+        evaluateAnatomyOfPolynomial(polynomial);
         doSimplifiedPolynomial(polynomial);
+
+        log.info(">> SIMPLIFIER: Simplified polynomial - [ simplifiedPolynomial=\"{}\" ]", polynomial.getSimplified());
     }
 
     private void doSimplifiedPolynomial(Polynomial polynomial) {

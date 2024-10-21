@@ -1,7 +1,7 @@
-package com.example.polynomial.model.dto;
+package com.example.polynomial.model.dto.response;
 
 import com.example.polynomial.model.domain.Polynomial;
-import com.example.polynomial.model.enums.DeletePolynomialStatus;
+import com.example.polynomial.model.dto.response.enums.DeletePolynomialStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 

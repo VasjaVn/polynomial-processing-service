@@ -2,6 +2,7 @@ package com.example.polynomial.util.processor.helper;
 
 import com.example.polynomial.model.domain.Polynomial;
 import com.example.polynomial.util.processor.converter.PolynomialConverter;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+@Log4j2
 @Component
 public class PolynomialMultiplier extends AbstractPolynomialBase {
 
@@ -24,6 +26,9 @@ public class PolynomialMultiplier extends AbstractPolynomialBase {
     public void multiply(Polynomial polynomial) {
         List<String> multipliers = polynomial.getMultipliers();
 
+        log.info(">> MULTIPLIER: Multiply polynomial - [ polynomial=\"{}\", multipliers={} ].",
+                polynomial.getNormalized(), multipliers);
+
         List<Integer> firstCoefficients = preparePolynomialForMultiply(multipliers.get(0));
         List<Integer> secondCoefficients = preparePolynomialForMultiply(multipliers.get(1));
         List<Integer> resultCoefficients = multiplyHelper(firstCoefficients, secondCoefficients);
@@ -35,9 +40,10 @@ public class PolynomialMultiplier extends AbstractPolynomialBase {
 
         polynomial.setMultiplied(
                 polynomialConverter.toPolynomailAsString(resultCoefficients));
-//        polynomial.setSimplified(polynomial.getMultiplied());
 
-        evaluateAnatomyForPolynomial(polynomial);
+        log.info(">> MULTIPLIER: Multiplied polynomial - [ multipliedPolynomial=\"{}\" ]", polynomial.getMultiplied());
+
+        evaluateAnatomyOfPolynomial(polynomial);
     }
 
     private List<Integer> preparePolynomialForMultiply(String multiplier) {
@@ -56,7 +62,7 @@ public class PolynomialMultiplier extends AbstractPolynomialBase {
 
     private List<Integer> multiplyHelper(List<Integer> first, List<Integer> second) {
         List<Integer> result = new ArrayList<>(
-                Collections.nCopies(first.size() + second.size() -1, 0));
+                Collections.nCopies(first.size() + second.size() - 1, 0));
 
         for (int i = 0; i < first.size(); i++) {
             for (int j = 0; j < second.size(); j++) {

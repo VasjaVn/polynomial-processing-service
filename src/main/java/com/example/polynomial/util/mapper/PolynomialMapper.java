@@ -1,11 +1,11 @@
 package com.example.polynomial.util.mapper;
 
-import com.example.polynomial.model.dto.PolynomialRequestDto;
-import com.example.polynomial.model.dto.PolynomialResponseDto;
+import com.example.polynomial.model.dto.request.PolynomialRequestDto;
+import com.example.polynomial.model.dto.response.PolynomialResponseDto;
 import com.example.polynomial.model.entity.PolynomialCalculateEntity;
 import com.example.polynomial.model.entity.PolynomialEntity;
 import com.example.polynomial.model.domain.Polynomial;
-import com.example.polynomial.model.enums.DeletePolynomialStatus;
+import com.example.polynomial.model.dto.response.enums.DeletePolynomialStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

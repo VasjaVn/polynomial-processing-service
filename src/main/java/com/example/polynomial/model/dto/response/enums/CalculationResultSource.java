@@ -1,4 +1,4 @@
-package com.example.polynomial.model.enums;
+package com.example.polynomial.model.dto.response.enums;
 
 public enum CalculationResultSource {
     EVALUATION,

@@ -5,8 +5,10 @@ import com.example.polynomial.util.processor.helper.PolynomialEvaluator;
 import com.example.polynomial.util.processor.helper.PolynomialMultiplier;
 import com.example.polynomial.util.processor.helper.PolynomialSimplifier;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
+@Log4j2
 @Component
 @RequiredArgsConstructor
 public class PolynomialProcessor {
@@ -18,16 +20,32 @@ public class PolynomialProcessor {
     private final PolynomialEvaluator polynomialEvaluator;
 
     public void simplifyPolynomial(Polynomial polynomial) {
+        log.info("> PROCESSOR: Simplify polynomial - [ polynomial=\"{}\" ]", polynomial.getNormalized());
+
         polynomialSimplifier.simplify(polynomial);
+
+        log.info("> PROCESSOR: Simplified polynomial - [ simplifiedPolynomial=\"{}\" ]",
+                polynomial.getSimplified());
     }
 
     public void multiplyPolynomials(Polynomial polynomial) {
         if (polynomial.hasMultipliers()) {
+            log.info("> PROCESSOR: Multiply polynomial - [ polynomial=\"{}\" ]", polynomial.getNormalized());
+
             polynomialMultiplier.multiply(polynomial);
+
+            log.info("> PROCESSOR: Multiplied polynomial - [ multipliedPolynomial=\"{}\" ]",
+                    polynomial.getMultiplied());
         }
     }
 
     public void evaluatePolynomial(Polynomial polynomial) {
+        log.info("> PROCESSOR: Evaluate polynomial - [ polynomial=\"{}\", value={} ]",
+                polynomial.getSimplifiedPolynomial(), polynomial.getCalculationResult().getValue());
+
         polynomialEvaluator.evaluate(polynomial);
+
+        log.info("> PROCESSOR: Evaluated polynomial - [ result={} ]",
+                polynomial.getCalculationResult().getResult());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.polynomial.util.processor.converter;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import static com.example.polynomial.util.PolynomialRegEx.REGEX_POLYNOMIAL_TERM_
 import static com.example.polynomial.util.PolynomialRegEx.REGEX_POLYNOMIAL_TERM_VARIABLE_WITH_DEGREE;
 import static java.util.function.Predicate.not;
 
+@Log4j2
 @Component
 public class PolynomialConverter {
     private static final Integer POLYNOMIAL_TERM_VARIABLE_DEGREE_EQ_ONE = 1;
@@ -22,8 +24,9 @@ public class PolynomialConverter {
     private static final Integer POLYNOMIAL_TERM_COEFFICIENT_EQ_ONE = 1;
 
     public String toPolynomailAsString(List<Integer> coefficients) {
-        StringBuilder polynomialBuilder = new StringBuilder();
+        log.info(">>> CONVERTER: Convert coefficients to polynomial - [ coefficients={} ]", coefficients);
 
+        StringBuilder polynomialBuilder = new StringBuilder();
         for (int degree = coefficients.size() - 1; degree >= 0; degree--) {
             Integer coefficient = coefficients.get(degree);
             if (coefficient == 0) continue;
@@ -38,24 +41,39 @@ public class PolynomialConverter {
             polynomialBuilder.deleteCharAt(0);
         }
 
-        return polynomialBuilder.toString();
+        String strPolynomial = polynomialBuilder.toString();
+
+        log.info(">>> CONVERTER: Result converted coefficients to polynomial - [ polynomial={} ]", strPolynomial);
+
+        return strPolynomial;
     }
 
     public List<String> toListTerms(String strPolynomial) {
-        String [] terms = strPolynomial.replace("-", "+-")
+        log.info(">>> CONVERTER: Convert polynomial to list of terms - [ polynomial=\"{}\" ]", strPolynomial);
+
+        String [] arrayTerms = strPolynomial.replace("-", "+-")
                 .split(REGEX_POLYNOMIAL_SPLIT_ON_TERMS);
 
-        return Arrays.stream(terms)
+        List<String> listTerms = Arrays.stream(arrayTerms)
                 .filter(not(String::isEmpty))
                 .toList();
+
+        log.info(">>> CONVERTER: Result converted polynomial to list of terms - [ listTerms=\"{}\" ]", listTerms);
+
+        return listTerms;
     }
 
     public Map<Integer, Integer> toMapDegreeTerms(List<String> terms) {
+        log.info(">>> CONVERTER: Convert terms to degree terms - [ terms=\"{}\" ]", terms);
+
         Map<Integer, Integer> mapDegreeTerms = new HashMap<>();
         for (String term : terms) {
             String [] pairCoefVarOfTerm = term.split(REGEX_POLYNOMIAL_SPLIT_TERM_ON_COEFFICIENT_AND_VARIABLE);
             addToMapDegreeTerms(mapDegreeTerms, pairCoefVarOfTerm);
         }
+
+        log.info(">>> CONVERTER: Result converted terms to degree terms - [ degreeTerms={} ]", mapDegreeTerms);
+
         return mapDegreeTerms;
     }
 

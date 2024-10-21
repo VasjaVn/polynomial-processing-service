@@ -1,6 +1,6 @@
 package com.example.polynomial.model.domain;
 
-import com.example.polynomial.model.enums.CalculationResultSource;
+import com.example.polynomial.model.dto.response.enums.CalculationResultSource;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.util.Assert;

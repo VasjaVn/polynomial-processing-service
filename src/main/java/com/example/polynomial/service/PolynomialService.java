@@ -1,7 +1,7 @@
 package com.example.polynomial.service;
 
-import com.example.polynomial.model.dto.PolynomialRequestDto;
-import com.example.polynomial.model.dto.PolynomialResponseDto;
+import com.example.polynomial.model.dto.request.PolynomialRequestDto;
+import com.example.polynomial.model.dto.response.PolynomialResponseDto;
 
 public interface PolynomialService {
     PolynomialResponseDto evaluatePolynomial(PolynomialRequestDto polynomialRequestDto);

@@ -4,26 +4,48 @@ spring:
 
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
-    username: postgres
+    username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update
+    ddl-auto: none
+#      ddl-auto: update
     show-sql: true
 
-#  cache:
-#    type: redis
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    validate-on-migrate:
+    baseline-version: 0
 
+  cache:
+    type: redis
 
-#  data:
-#    redis:
-#      host: localhost
-#      port: 6379
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
 
-## Custom Application Properties
+##############################################################################
+#                        Custom Application Properties                       #
+##############################################################################
 app:
   cache:
+    # time to live
     ttl: 30
+
     # NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS
     timeUnit: SECONDS
+
+    # Warm Redis Cache during run application
+    warm: false
+    warmData:
+      - polynomial: x^2+x-2
+        value: 1
+      - polynomial: 10*x^2-2*x+5
+        value: 3
+      - polynomial: 2*x^3-2*x+10
+        value: 3
+
