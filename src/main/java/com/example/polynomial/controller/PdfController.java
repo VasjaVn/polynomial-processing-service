@@ -1,5 +1,6 @@
 package com.example.polynomial.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 import static org.springframework.http.MediaType.APPLICATION_PDF;
 
+@Hidden
 @RestController
 @RequestMapping("/pdf")
 @RequiredArgsConstructor
