@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(value = PolynomialController.class)
-public class PolynomialControllerTest {
+public class PolynomialControllerIT {
 
     private static final String RAW_POLYNOMIAL = "x^2+2*x-1";
 
