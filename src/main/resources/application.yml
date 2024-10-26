@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: polynomial-processing-service
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+#      ddl-auto: update
+    show-sql: true
+
+  flyway:
+    enabled: false
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+#logging:
+#  level:
+#    org.springframework: DEBUG
+
+##############################################################################
+#                        Custom Application Properties                       #
+##############################################################################
+app:
+  security:
+##############################################################################
+#      For Generation of JWT Secret Key: https://jwtsecret.com/generate      #
+#      For Generation of JWT Token: http://jwtbuilder.jamiekurtz.com/        #
+#      For Validation JWT Token: https://jwt.io/                             #
+##############################################################################
+    jwt:
+      secret-key: ${JWT_SECRET_KEY:}
+
+  cache:
+    enable-cache: ${ENABLE_CACHE:false}
+# time to live
+    ttl: 30
+
+# NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS
+    time-unit: SECONDS
+
+# Warm Redis Cache during run application
+    warm: false
+    warmData:
+      - polynomial: x^2+x-2
+        value: 1
+      - polynomial: 10*x^2-2*x+5
+        value: 3
+      - polynomial: 2*x^3-2*x+10
+        value: 3
