@@ -84,7 +84,7 @@ mvn clean install
 This application uses `JSON Web Tokens (JWT)` for authentication.
 ### 3.1. Overview of JWT
 **[JWT](https://jwt.io/)** is a compact, URL-safe means of representing claims to be transferred between two parties. The claims in a JWT are encoded as a JSON object that is used as the payload of a `JSON Web Signature (JWS)` structure or as the plaintext of a `JSON Web Encryption (JWE)` structure, enabling the claims to be digitally signed or integrity protected with a `message authentication code (MAC)` and/or `encrypted`.
-### 3.2. Generate a `JWT Secret Kay`
+### 3.2. Generate a `JWT Secret Key`
 - Use this [online resource](https://jwtsecret.com/generate) for generation a `JWT Secret Key`.
 ### 3.3 Generate a `JWT Token`
 - Use this [online resource](http://jwtbuilder.jamiekurtz.com/) for generation a `JWT Token`.
