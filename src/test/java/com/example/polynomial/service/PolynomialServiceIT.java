@@ -41,7 +41,7 @@ import static org.mockito.Mockito.verify;
         "JWT_SECRET_KEY=AAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "ENABLE_CACHE=true"
 })
-public class PolynomialServiceIntegrationTest {
+public class PolynomialServiceIT {
 
     private static final RedisServer REDIS_SERVER = new RedisServer();
 
