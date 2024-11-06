@@ -304,7 +304,7 @@ In the Swagger UI, you can:
 
 #### 8.3.5. Additional Resources
 * [API Documentation](https://swagger.io/solutions/api-documentation/)
-* [An overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/OverviewAn%20overview%20of%20HTTP)
+* [An overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview)
 * [Swagger Documentation](https://swagger.io/docs/)
 
 
