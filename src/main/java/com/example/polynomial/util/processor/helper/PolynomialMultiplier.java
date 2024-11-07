@@ -54,11 +54,11 @@ public class PolynomialMultiplier extends AbstractPolynomialBase {
         List<Integer> preparedMultiplier = new ArrayList<>();
 
         List<String> terms = polynomialConverter.toListTerms(multiplier);
-        Map<Integer,Integer> mapDegreeTerms = polynomialConverter.toMapDegreeCoeff(terms);
+        Map<Integer,Integer> mapDegreeCoeff = polynomialConverter.toMapDegreeCoeff(terms);
 
-        int maxDegree = Collections.max(mapDegreeTerms.keySet());
+        int maxDegree = Collections.max(mapDegreeCoeff.keySet());
         for (int degree = 0; degree <= maxDegree; degree++) {
-            preparedMultiplier.add(mapDegreeTerms.getOrDefault(degree, 0));
+            preparedMultiplier.add(mapDegreeCoeff.getOrDefault(degree, 0));
         }
 
         return preparedMultiplier;
