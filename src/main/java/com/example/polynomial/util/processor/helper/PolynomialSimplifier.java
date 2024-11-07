@@ -35,11 +35,11 @@ public class PolynomialSimplifier extends AbstractPolynomialBase {
     }
 
     private void doSimplifiedPolynomial(Polynomial polynomial) {
-        TreeMap<Integer, Integer> treeDegreeTerms =
+        TreeMap<Integer, Integer> treeDegreeCoeff =
                 new TreeMap<>(polynomial.getAnatomy().getMapDegreeCoeff());
 
         StringBuilder simplifiedBuilder = new StringBuilder();
-        for (Map.Entry<Integer, Integer> e : treeDegreeTerms.descendingMap().entrySet()) {
+        for (Map.Entry<Integer, Integer> e : treeDegreeCoeff.descendingMap().entrySet()) {
             if (e.getValue() == 0) continue;
 
             switch (e.getKey()) {
