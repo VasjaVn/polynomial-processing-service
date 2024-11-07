@@ -69,42 +69,42 @@ public class PolynomialConverter {
         return listTerms;
     }
 
-    public Map<Integer, Integer> toMapDegreeTerms(List<String> terms) {
+    public Map<Integer, Integer> toMapDegreeCoeff(List<String> terms) {
         Assert.isTrue(terms != null && !terms.isEmpty(),
                 "List of polynomial terms must not be null or empty");
 
         log.info(">>> CONVERTER: Convert terms to degree terms - [ terms=\"{}\" ]", terms);
 
-        Map<Integer, Integer> mapDegreeTerms = new HashMap<>();
+        Map<Integer, Integer> mapDegreeCoeff = new HashMap<>();
         for (String term : terms) {
             String [] pairCoefVarOfTerm = term.split(REGEX_POLYNOMIAL_SPLIT_TERM_ON_COEFFICIENT_AND_VARIABLE);
-            addToMapDegreeTerms(mapDegreeTerms, pairCoefVarOfTerm);
+            addToMapDegreeCoeff(mapDegreeCoeff, pairCoefVarOfTerm);
         }
 
-        log.info(">>> CONVERTER: Result converted terms to degree terms - [ degreeTerms={} ]", mapDegreeTerms);
+        log.info(">>> CONVERTER: Result converted terms to degree terms - [ degreeTerms={} ]", mapDegreeCoeff);
 
-        return mapDegreeTerms;
+        return mapDegreeCoeff;
     }
 
-    private void addToMapDegreeTerms(Map<Integer, Integer> mapDegreeTerms, String [] pairCoefVarOfTerm) {
-        switch (pairCoefVarOfTerm.length) {
+    private void addToMapDegreeCoeff(Map<Integer, Integer> mapDegreeCoeff, String [] pairCoeffVarOfTerm) {
+        switch (pairCoeffVarOfTerm.length) {
             case 1 -> {
                 Integer degree;
-                Integer number;
+                Integer coefficient;
 
-                String numOrVar = pairCoefVarOfTerm[0];
-                if (numOrVar.matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITHOUT_DEGREE)) {
+                String coeffOrVar = pairCoeffVarOfTerm[0];
+                if (coeffOrVar.matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITHOUT_DEGREE)) {
                     degree = POLYNOMIAL_TERM_VARIABLE_DEGREE_EQ_ONE;
-                    number = POLYNOMIAL_TERM_COEFFICIENT_EQ_ONE * (numOrVar.startsWith("-") ? -1 : 1);
+                    coefficient = POLYNOMIAL_TERM_COEFFICIENT_EQ_ONE * (coeffOrVar.startsWith("-") ? -1 : 1);
 
-                } else if (numOrVar.matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITH_DEGREE)) {
-                    String [] pairVarXDegree = numOrVar.split(REGEX_POLYNOMIAL_SPLIT_TERM_VARIABLE_ON_X_AND_DEGREE);
+                } else if (coeffOrVar.matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITH_DEGREE)) {
+                    String [] pairVarXDegree = coeffOrVar.split(REGEX_POLYNOMIAL_SPLIT_TERM_VARIABLE_ON_X_AND_DEGREE);
                     degree = Integer.parseInt(pairVarXDegree[1]);
-                    number = POLYNOMIAL_TERM_COEFFICIENT_EQ_ONE * (numOrVar.startsWith("-") ? -1 : 1);
+                    coefficient = POLYNOMIAL_TERM_COEFFICIENT_EQ_ONE * (coeffOrVar.startsWith("-") ? -1 : 1);
 
-                } else if (numOrVar.matches(REGEX_POLYNOMIAL_TERM_COEFFICIENT)) {
+                } else if (coeffOrVar.matches(REGEX_POLYNOMIAL_TERM_COEFFICIENT)) {
                     degree = POLYNOMIAL_TERM_VARIABLE_DEGREE_EQ_ZERO;
-                    number = Integer.parseInt(numOrVar);
+                    coefficient = Integer.parseInt(coeffOrVar);
 
                 } else {
                     // todo: we shouldn't come here
@@ -112,18 +112,18 @@ public class PolynomialConverter {
                     throw new ConverterUnexpectedCaseException();
                 }
 
-                mapDegreeTerms.put(degree, mapDegreeTerms.getOrDefault(degree, 0) + number);
+                mapDegreeCoeff.put(degree, mapDegreeCoeff.getOrDefault(degree, 0) + coefficient);
             }
 
             case 2 -> {
                 Integer degree;
-                Integer number = Integer.parseInt(pairCoefVarOfTerm[0]);
+                Integer coefficient = Integer.parseInt(pairCoeffVarOfTerm[0]);
 
-                if (pairCoefVarOfTerm[1].matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITHOUT_DEGREE)) {
+                if (pairCoeffVarOfTerm[1].matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITHOUT_DEGREE)) {
                     degree = POLYNOMIAL_TERM_VARIABLE_DEGREE_EQ_ONE;
 
-                } else if (pairCoefVarOfTerm[1].matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITH_DEGREE)){
-                    String [] pairVarXDegree = pairCoefVarOfTerm[1].split(REGEX_POLYNOMIAL_SPLIT_TERM_VARIABLE_ON_X_AND_DEGREE);
+                } else if (pairCoeffVarOfTerm[1].matches(REGEX_POLYNOMIAL_TERM_VARIABLE_WITH_DEGREE)){
+                    String [] pairVarXDegree = pairCoeffVarOfTerm[1].split(REGEX_POLYNOMIAL_SPLIT_TERM_VARIABLE_ON_X_AND_DEGREE);
                     degree = Integer.parseInt(pairVarXDegree[1]);
 
                 } else {
@@ -132,7 +132,7 @@ public class PolynomialConverter {
                     throw new ConverterUnexpectedCaseException();
                 }
 
-                mapDegreeTerms.put(degree, mapDegreeTerms.getOrDefault(degree, 0) + number);
+                mapDegreeCoeff.put(degree, mapDegreeCoeff.getOrDefault(degree, 0) + coefficient);
             }
         }
     }

@@ -25,10 +25,10 @@ public abstract class AbstractPolynomialBase {
 
         log.info(">> Evaluate anatomy of polynomial: [ terms={} ]", listTerms);
 
-        Map<Integer, Integer> mapDegreeTerms = polynomialConverter.toMapDegreeTerms(listTerms);
-        polynomialAnatomy.setMapDegreeTerms(mapDegreeTerms);
+        Map<Integer, Integer> mapDegreeCoeff = polynomialConverter.toMapDegreeCoeff(listTerms);
+        polynomialAnatomy.setMapDegreeCoeff(mapDegreeCoeff);
 
-        log.info(">> Evaluate anatomy of polynomial: [ degreeTerms={} ]", mapDegreeTerms);
+        log.info(">> Evaluate anatomy of polynomial: [ degreeTerms={} ]", mapDegreeCoeff);
     }
 
     protected abstract String getNormalizedOrMultipliedPolynomial(Polynomial polynomial);

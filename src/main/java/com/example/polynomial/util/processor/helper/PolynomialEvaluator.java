@@ -14,20 +14,20 @@ public class PolynomialEvaluator {
     public void evaluate(Polynomial polynomial) {
         Assert.isTrue(polynomial != null, "Polynomial must not be NULL");
         Assert.isTrue(polynomial.getAnatomy() != null, "Anatomy of Polynomial must not be NULL");
-        Assert.isTrue(polynomial.getAnatomy().getMapDegreeTerms() != null,
+        Assert.isTrue(polynomial.getAnatomy().getMapDegreeCoeff() != null,
                 "Map degree terms of Anatomy of Polynomial must not be NULL");
-        Assert.isTrue(!polynomial.getAnatomy().getMapDegreeTerms().isEmpty(),
+        Assert.isTrue(!polynomial.getAnatomy().getMapDegreeCoeff().isEmpty(),
                 "Map degree terms of Anatomy of Polynomial must not be empty");
 
         log.info(">> EVALUATOR: Evaluate polynomial - [ polynomial=\"{}\", value={} ].",
                 polynomial.getSimplifiedPolynomial(), polynomial.getCalculationResult().getValue());
 
-        Map<Integer,Integer> mapDegreeTerms = polynomial.getAnatomy().getMapDegreeTerms();
+        Map<Integer,Integer> mapDegreeCoeff = polynomial.getAnatomy().getMapDegreeCoeff();
         Integer value = polynomial.getCalculationResult().getValue();
 
         double result = 0.0;
-        for (Map.Entry<Integer,Integer> degreeTerm : mapDegreeTerms.entrySet()) {
-            result += degreeTerm.getValue() * Math.pow(value, degreeTerm.getKey());
+        for (Map.Entry<Integer,Integer> degreeCoeff : mapDegreeCoeff.entrySet()) {
+            result += degreeCoeff.getValue() * Math.pow(value, degreeCoeff.getKey());
         }
 
         polynomial.getCalculationResult().setResult(result);

@@ -72,7 +72,7 @@ public class PolynomialEvaluatorTest {
         calculationResult.setValue(value);
 
         Polynomial.Anatomy anatomy = new Polynomial.Anatomy();
-        anatomy.setMapDegreeTerms(mapDegreeTerms);
+        anatomy.setMapDegreeCoeff(mapDegreeTerms);
 
         Polynomial polynomial = new Polynomial(strPolynomial);
         polynomial.setSimplified(simplifiedPolynomial);

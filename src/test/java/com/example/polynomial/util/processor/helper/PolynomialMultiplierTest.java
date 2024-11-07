@@ -31,12 +31,12 @@ public class PolynomialMultiplierTest {
 
         when(polynomialConverterMock.toListTerms("x-1"))
                 .thenReturn(List.of("x", "-1"));
-        when(polynomialConverterMock.toMapDegreeTerms(List.of("x", "-1")))
+        when(polynomialConverterMock.toMapDegreeCoeff(List.of("x", "-1")))
                 .thenReturn(Map.of(0, -1, 1, 1));
 
         when(polynomialConverterMock.toListTerms("2*x-1"))
                 .thenReturn(List.of("2*x", "-1"));
-        when(polynomialConverterMock.toMapDegreeTerms(List.of("2*x", "-1")))
+        when(polynomialConverterMock.toMapDegreeCoeff(List.of("2*x", "-1")))
                 .thenReturn(Map.of(0, -1, 1, 2));
 
         when(polynomialConverterMock.toPolynomialAsString(List.of(1, -3, 2)))
@@ -44,13 +44,13 @@ public class PolynomialMultiplierTest {
 
         when(polynomialConverterMock.toListTerms("2*x^2-3*x+1"))
                 .thenReturn(List.of("2*x^3", "-3*x", "1"));
-        when(polynomialConverterMock.toMapDegreeTerms(List.of("2*x^3", "-3*x", "1")))
+        when(polynomialConverterMock.toMapDegreeCoeff(List.of("2*x^3", "-3*x", "1")))
                 .thenReturn(Map.of(0, 1, 1, -3, 3, 2));
 
         underTest.multiply(polynomial);
         assertEquals("2*x^2-3*x+1", polynomial.getMultiplied());
         assertEquals(List.of("2*x^3", "-3*x", "1"), polynomial.getAnatomy().getListTerms());
-        assertEquals(Map.of(0, 1, 1, -3, 3, 2), polynomial.getAnatomy().getMapDegreeTerms());
+        assertEquals(Map.of(0, 1, 1, -3, 3, 2), polynomial.getAnatomy().getMapDegreeCoeff());
     }
 
 

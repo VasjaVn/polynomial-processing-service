@@ -53,7 +53,7 @@ public class PolynomialMapperTest {
         assertFalse(polynomial.hasMultipliers());
         assertNotNull(polynomial.getAnatomy());
         assertNull(polynomial.getAnatomy().getListTerms());
-        assertNull(polynomial.getAnatomy().getMapDegreeTerms());
+        assertNull(polynomial.getAnatomy().getMapDegreeCoeff());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class PolynomialMapperTest {
         assertTrue(polynomial.hasMultipliers());
         assertNotNull(polynomial.getAnatomy());
         assertNull(polynomial.getAnatomy().getListTerms());
-        assertNull(polynomial.getAnatomy().getMapDegreeTerms());
+        assertNull(polynomial.getAnatomy().getMapDegreeCoeff());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class PolynomialMapperTest {
         assertFalse(polynomial.hasMultipliers());
         assertNotNull(polynomial.getAnatomy());
         assertNull(polynomial.getAnatomy().getListTerms());
-        assertNull(polynomial.getAnatomy().getMapDegreeTerms());
+        assertNull(polynomial.getAnatomy().getMapDegreeCoeff());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class PolynomialMapperTest {
         assertTrue(polynomial.hasMultipliers());
         assertNotNull(polynomial.getAnatomy());
         assertNull(polynomial.getAnatomy().getListTerms());
-        assertNull(polynomial.getAnatomy().getMapDegreeTerms());
+        assertNull(polynomial.getAnatomy().getMapDegreeCoeff());
     }
 
     @Test

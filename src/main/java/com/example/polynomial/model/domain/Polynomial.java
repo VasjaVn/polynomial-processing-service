@@ -91,7 +91,7 @@ public class Polynomial {
 
     @Data
     public static class Anatomy {
-        private Map<Integer, Integer> mapDegreeTerms;
+        private Map<Integer, Integer> mapDegreeCoeff;
         private List<String> listTerms;
     }
 

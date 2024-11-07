@@ -36,7 +36,7 @@ public class PolynomialSimplifier extends AbstractPolynomialBase {
 
     private void doSimplifiedPolynomial(Polynomial polynomial) {
         TreeMap<Integer, Integer> treeDegreeTerms =
-                new TreeMap<>(polynomial.getAnatomy().getMapDegreeTerms());
+                new TreeMap<>(polynomial.getAnatomy().getMapDegreeCoeff());
 
         StringBuilder simplifiedBuilder = new StringBuilder();
         for (Map.Entry<Integer, Integer> e : treeDegreeTerms.descendingMap().entrySet()) {

@@ -66,24 +66,24 @@ public class PolynomialConverterTest {
     @Test
     public void givenListOfTerms_whenConvert_thenReturnMapOfDegreeTerms() {
         assertEquals(Map.of(0,45, 1, 5, 2, -4),
-                underTest.toMapDegreeTerms(List.of("-4*x^2", "5*x", "45")));
-        assertEquals(Map.of(0,45), underTest.toMapDegreeTerms(List.of("45")));
-        assertEquals(Map.of(1,1), underTest.toMapDegreeTerms(List.of("x")));
-        assertEquals(Map.of(1,2), underTest.toMapDegreeTerms(List.of("2*x")));
-        assertEquals(Map.of(6,5), underTest.toMapDegreeTerms(List.of("5*x^6")));
+                underTest.toMapDegreeCoeff(List.of("-4*x^2", "5*x", "45")));
+        assertEquals(Map.of(0,45), underTest.toMapDegreeCoeff(List.of("45")));
+        assertEquals(Map.of(1,1), underTest.toMapDegreeCoeff(List.of("x")));
+        assertEquals(Map.of(1,2), underTest.toMapDegreeCoeff(List.of("2*x")));
+        assertEquals(Map.of(6,5), underTest.toMapDegreeCoeff(List.of("5*x^6")));
     }
 
     @Test
     public void givenListOfTermsIsEqualNll_whenConvert_thenThrowsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
-            underTest.toMapDegreeTerms(null);
+            underTest.toMapDegreeCoeff(null);
         });
     }
 
     @Test
     public void givenListOfTermsIsEmpty_whenConvert_thenThrowsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
-            underTest.toMapDegreeTerms(List.of());
+            underTest.toMapDegreeCoeff(List.of());
         });
     }
 }

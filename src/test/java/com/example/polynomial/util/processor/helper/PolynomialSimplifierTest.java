@@ -30,14 +30,14 @@ public class PolynomialSimplifierTest {
 
         when(polynomialConverterMock.toListTerms("2*x^3+5*x-10+3*x+4"))
                 .thenReturn(List.of("2*x^3", "5*x", "-10", "3*x", "4"));
-        when(polynomialConverterMock.toMapDegreeTerms(List.of("2*x^3", "5*x", "-10", "3*x", "4")))
+        when(polynomialConverterMock.toMapDegreeCoeff(List.of("2*x^3", "5*x", "-10", "3*x", "4")))
                 .thenReturn(Map.of(0, -6, 1, 8, 3, 2));
 
         underTest.simplify(polynomial);
 
         assertEquals("2*x^3+8*x-6", polynomial.getSimplified());
         assertEquals(List.of("2*x^3", "5*x", "-10", "3*x", "4"), polynomial.getAnatomy().getListTerms());
-        assertEquals(Map.of(0, -6, 1, 8, 3, 2), polynomial.getAnatomy().getMapDegreeTerms());
+        assertEquals(Map.of(0, -6, 1, 8, 3, 2), polynomial.getAnatomy().getMapDegreeCoeff());
     }
 
     @Test
